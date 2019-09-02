@@ -4631,184 +4631,33 @@ var maintainloop = (() => {
                     census[instance.type]++;
                     return instance;
                 }
-            }).filter(e => { return e; });      
+            }).filter(e => { return e; });    
             // Spawning
- spawnCrasher(census);
+            spawnCrasher(census);
             spawnBosses(census);
-            // Bots
-            if (bots.length < c.BOTS) {
-                let o = new Entity(room.random());
-                o.color = 17;
-                o.define(Class.bot);
-                o.define(Class.basic);
-                o.name += ran.chooseBotName();
-                o.refreshBodyAttributes();
-                o.color = 17;
-                bots.push(o);
-            }
-            // Remove dead ones
-            bots = bots.filter(e => {
-                return !e.isDead();
-            });
-            // Slowly upgrade them
-            bots.forEach(o => {
-                if (o.skill.level < 45) {
-                    o.skill.score += 35;
-                    o.skill.maintain();
-                }
-            });
-
-        };
-    })();           
-          var classList = []
-var mlist = []
-
-var deflist = require('./lib/definitions')
-
-// Get class definitions and index them
-var Class = (() => {
-  let def = require('./lib/definitions'),
-        i = 0;
-    for (let k in def) {
-        if (!def.hasOwnProperty(k)) continue;
-        def[k].index = i++;
-        mlist.push(k)
-        if (!blockedtanks.includes(k)) {
-          classList.push(k)
-        }
-    }
-    return def;
-})();
-          var botSpawn = undefined
-          function randomTank() {
-  if (botSpawn == undefined) {
-    return classList[Math.floor(Math.random() * Math.floor(classList.length))]
-  } else {
-    var Temp = botSpawn
-    var botSpawnTemp = botSpawn
-    var Temp = botSpawn
-    botSpawn = undefined
-    return 'Class.' + botSpawnTemp
-  }
-}
-          randomgamemode1 = "open"
-randomgamemode2 = ran.choose(["ffa", "tdm", "prt"])
-randomgamemode3 = ran.choose([2,3,4])
-               if (bots.length < c.BOTS) {
-                    let o = new Entity(room.randomType(('norm')));
+            /*/ Bots
+                if (bots.length < c.BOTS) {
+                    let o = new Entity(room.random());
+                    o.color = 17;
                     o.define(Class.bot);
-                    o.color = 12;
-                    let tank = randomTank()
-                    //o.define(Class[tank]);
-                    o.define(ran.choose([Class.minishot, Class.boater, Class.placer, Class.pelleteer, Class.pound, Class.twin, Class.auto2, Class.cloner, Class.machine, Class.propeller, Class.trapper, Class.sniper, Class.flank, Class.director, Class.darvel, Class.uzi]))
+                    o.define(Class.basic);
                     o.name += ran.chooseBotName();
-                    if (randomgamemode2 == "tdm") {
-                    if (randomgamemode3 == 2) o.team = ran.choose([-1, -2])
-                    if (randomgamemode3 == 3) o.team = ran.choose([-1, -2, -3])
-                    if (randomgamemode3 == 4) o.team = ran.choose([-1, -2, -3, -4])
-                    if (o.team == -1) o.color = 10;
-                    if (o.team == -2) o.color = 11;
-                    if (o.team == -3) o.color = 12;
-                    if (o.team == -4) o.color = 15;
-                    }
                     o.refreshBodyAttributes();
+                    o.color = 17;
                     bots.push(o);
                 }
-                // Kill bad classes
-                bots.forEach(o => { if (o.nobot === true) {o.kill(Class.auto2gun, Class.auto3gun, Class.auto4gun, Class.auto5gun, Class.bullet, Class.autoTurret, Class.testclass1, Class.cruiser2, Class.dual);}})
                 // Remove dead ones
                 bots = bots.filter(e => { return !e.isDead(); });
                 // Slowly upgrade them
                 bots.forEach(o => {
                     if (o.skill.level < 45) {
-                        o.skill.score += 16;
-                        o.skill.maintain();
-                    }
-if (o.skill.level == 30 && o.upgrades.length != 0) {
-                    let number = 0;
-                    let number3 = 0;
-                    if (o.upgrades.length == 1) number3 = 0;
-                    if (o.upgrades.length == 2) number3 = ran.choose([0,1]);
-                    if (o.upgrades.length == 3) number3 = ran.choose([0,1,2]);
-                    if (o.upgrades.length == 4) number3 = ran.choose([0,1,2,3]);
-                    if (o.upgrades.length == 5) number3 = ran.choose([0,1,2,3,4]);
-                    if (o.upgrades.length == 6) number3 = ran.choose([0,1,2,3,4,5]);
-                    if (o.upgrades.length == 7) number3 = ran.choose([0,1,2,3,4,5,6]);
-                    if (o.upgrades.length == 8) number3 = ran.choose([0,1,2,3,4,5,6,7]);
-                    if (o.upgrades.length == 9) number3 = ran.choose([0,1,2,3,4,5,6,7,8]);
-                    if (o.upgrades.length == 10) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9]);
-                    if (o.upgrades.length == 11) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10]);
-                    if (o.upgrades.length == 12) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11]);
-                    if (o.upgrades.length == 13) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12]);
-                    if (o.upgrades.length == 14) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13]);
-                    if (o.upgrades.length == 15) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
-                    if (o.upgrades.length == 16) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
-                    if (o.upgrades.length == 17) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
-                    if (o.upgrades.length == 18) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]);
-                    number = number3;
-            console.log(number + ". Class: " + o.label)
-            let saveMe = o.upgrades[number].class;  
-            if (o.upgrades.length != 0) {
-            o.upgrades = [];
-            o.skill.score += 5000;
-            o.define(saveMe);
-            }
-            let ID = o.id;
-            entities.forEach(instance => {
-                if (instance.settings.clearOnMasterUpgrade && instance.master.id === ID) {
-                    instance.kill();
-                }
-            }); 
-            o.skill.update();
-            o.refreshBodyAttributes();
-}
-                  o.upgraded = false;
-if (o.skill.level == 45 && o.upgrades.length != 0) {
-                    let number2 = 0
-                    let number3 = 0;
-                    if (o.upgrades.length == 1) number3 = 0;
-                    if (o.upgrades.length == 2) number3 = ran.choose([0,1]);
-                    if (o.upgrades.length == 3) number3 = ran.choose([0,1,2]);
-                    if (o.upgrades.length == 4) number3 = ran.choose([0,1,2,3]);
-                    if (o.upgrades.length == 5) number3 = ran.choose([0,1,2,3,4]);
-                    if (o.upgrades.length == 6) number3 = ran.choose([0,1,2,3,4,5]);
-                    if (o.upgrades.length == 7) number3 = ran.choose([0,1,2,3,4,5,6]);
-                    if (o.upgrades.length == 8) number3 = ran.choose([0,1,2,3,4,5,6,7]);
-                    if (o.upgrades.length == 9) number3 = ran.choose([0,1,2,3,4,5,6,7,8]);
-                    if (o.upgrades.length == 10) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9]);
-                    if (o.upgrades.length == 11) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10]);
-                    if (o.upgrades.length == 12) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11]);
-                    if (o.upgrades.length == 13) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12]);
-                    if (o.upgrades.length == 14) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13]);
-                    if (o.upgrades.length == 15) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
-                    if (o.upgrades.length == 16) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
-                    if (o.upgrades.length == 17) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
-                    if (o.upgrades.length == 18) number3 = ran.choose([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]);
-                    number2 = number3;
-            console.log(number2 + ". Class: " + o.label)
-            let saveMe = o.upgrades[number2].class;  
-            if (o.upgrades.length != 0) {
-            o.upgrades = [];
-            o.upgraded = true;
-            o.define(saveMe);
-            }
-            let ID = o.id;
-            entities.forEach(instance => {
-                if (instance.settings.clearOnMasterUpgrade && instance.master.id === ID) {
-                    instance.kill();
-                }
-            }); 
-            o.skill.update();
-            o.refreshBodyAttributes();
-}
-                    if (o.skill.level < 15) {
-                        o.skill.score += (1000 - 16);
+                        o.skill.score += 35;
                         o.skill.maintain();
                     }
                 });
-                 
-              };
-
+            */
+        };
+    })();
     // The big food function
     let makefood = (() => {
         let food = [], foodSpawners = [];
