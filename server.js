@@ -4631,30 +4631,35 @@ var maintainloop = (() => {
                     census[instance.type]++;
                     return instance;
                 }
-            }).filter(e => { return e; });    
+            }).filter(e => { return e; });      
             // Spawning
-            spawnCrasher(census);
+ spawnCrasher(census);
             spawnBosses(census);
-                  // Return the spawning function
-        let bots = [];
-        return () => {
-            let census = {
-                crasher: 0,
-                miniboss: 0,
-                tank: 0,
-            };    
-            let npcs = entities.map(function npcCensus(instance) {
-                if (census[instance.type] != null) {
-                    census[instance.type]++;
-                    return instance;
+            // Bots
+            if (bots.length < c.BOTS) {
+                let o = new Entity(room.random());
+                o.color = 17;
+                o.define(Class.bot);
+                o.define(Class.basic);
+                o.name += ran.chooseBotName();
+                o.refreshBodyAttributes();
+                o.color = 17;
+                bots.push(o);
+            }
+            // Remove dead ones
+            bots = bots.filter(e => {
+                return !e.isDead();
+            });
+            // Slowly upgrade them
+            bots.forEach(o => {
+                if (o.skill.level < 45) {
+                    o.skill.score += 35;
+                    o.skill.maintain();
                 }
-            }).filter(e => { return e; });    
-            // Spawning
-            spawnCrasher(census);
-            spawnBosses(census);
-            spawnAnts(census);
-            spawnGlad(census); // line 6666
-            /** _________bots___________**/
+            });
+
+        };
+    })();           
           var classList = []
 var mlist = []
 
