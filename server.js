@@ -4642,12 +4642,12 @@ var maintainloop = (() => {
             // Spawning
             spawnCrasher(census);
             spawnBosses(census);
-            /*/ Bots
+            // Bots
                 if (bots.length < c.BOTS) {
                     let o = new Entity(room.random());
                     o.color = 17;
                     o.define(Class.bot);
-                    o.define(Class.basic);
+                    o.define = ran.choose([Class.basic, Class.twin, Class.sniper, Class.machine, Class.flank, Class.director, Class.pound, Class.trapper]);
                     o.name += ran.chooseBotName();
                     o.refreshBodyAttributes();
                     o.color = 17;
@@ -4662,7 +4662,6 @@ var maintainloop = (() => {
                         o.skill.maintain();
                     }
                 });
-            */
         };
     })();
     // The big food function
