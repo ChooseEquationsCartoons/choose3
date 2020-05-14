@@ -3048,14 +3048,14 @@ const sockets = (() => {
                         player.body.refreshBodyAttributes();
                     } }
                 } break;
-                case '0': { // testbed cheat
+                case '0': { 
                     if (m.length !== 0) { socket.kick('Ill-sized beta tester request.'); return 1; }
                     // cheatingbois
-                    if (player.body != null) { if (socket.key === process.env.SECRET) {
+                    if (player.body != null) { if (socket.key === process.env.SECRET) { // beta tester
                         player.body.define(Class.betatester);
                     } }
                 } break;
-                case '0': { // super testbed cheat
+                case '1': { 
                     if (m.length !== 0) { socket.kick('Ill-sized developer request.'); return 1; }
                     // supahcheatingbois
                     if (player.body != null) { if (socket.key === process.env.SUPERSECRET) {
@@ -4627,7 +4627,7 @@ var maintainloop = (() => {
                     o.color = [10, 11, 12][team-1];
             };
             for (let i=1; i<5; i++) {
-                room['bas' + i].forEach((loc) => { f(loc, i); }); 
+                room['bap' + i].forEach((loc) => { f(loc, i); }); 
             }
         // Return the spawning function
         let bots = [];
