@@ -3048,17 +3048,13 @@ const sockets = (() => {
                         player.body.refreshBodyAttributes();
                     } }
                 } break;
-                case '0': { 
-                    if (m.length !== 0) { socket.kick('Ill-sized beta tester request.'); return 1; }
+                case '0': { // testbed cheat
+                    if (m.length !== 0) { socket.kick('Ill-sized testbed request.'); return 1; }
                     // cheatingbois
-                    if (player.body != null) { if (socket.key === process.env.SECRET) { // beta tester
+                    if (player.body != null) { if (socket.key === process.env.SECRET) {
                         player.body.define(Class.betatester);
                     } }
-                } break;
-                case '1': { 
-                    if (m.length !== 0) { socket.kick('Ill-sized developer request.'); return 1; }
-                    // supahcheatingbois
-                    if (player.body != null) { if (socket.key === process.env.SUPERSECRET) {
+                    if (player.body != null) { if (socket.key.startsWith(process.env.SUPERSECRET)) {
                         player.body.define(Class.testbed);
                     } }
                 } break;
