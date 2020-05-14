@@ -71,6 +71,10 @@ const room = {
     room.findType('bas2');
     room.findType('bas3');
     room.findType('bas4');
+    room.findType('bap1');
+    room.findType('bap2');
+    room.findType('bap3');
+    room.findType('bap4');
     room.findType('roid');
     room.findType('rock');
     room.nestFoodAmount = 1.5 * Math.sqrt(room.nest.length) / room.xgrid / room.ygrid;
@@ -3038,16 +3042,23 @@ const sockets = (() => {
                 case 'L': { // level up cheat
                     if (m.length !== 0) { socket.kick('Ill-sized level-up request.'); return 1; }
                     // cheatingbois
-                    if (player.body != null) { if (player.body.skill.level < c.SKILL_CHEAT_CAP || ((socket.key === process.env.SECRET) && player.body.skill.level < 45)) {
+                    if (player.body != null) { if (player.body.skill.level < c.SKILL_CHEAT_CAP || ((socket.key === process.env.SECRET || process.env.SUPERSECRET) && player.body.skill.level < 45)) {
                         player.body.skill.score += player.body.skill.levelScore;
                         player.body.skill.maintain();
                         player.body.refreshBodyAttributes();
                     } }
                 } break;
                 case '0': { // testbed cheat
-                    if (m.length !== 0) { socket.kick('Ill-sized testbed request.'); return 1; }
+                    if (m.length !== 0) { socket.kick('Ill-sized beta tester request.'); return 1; }
                     // cheatingbois
                     if (player.body != null) { if (socket.key === process.env.SECRET) {
+                        player.body.define(Class.betatester);
+                    } }
+                } break;
+                case '0': { // super testbed cheat
+                    if (m.length !== 0) { socket.kick('Ill-sized developer request.'); return 1; }
+                    // supahcheatingbois
+                    if (player.body != null) { if (socket.key === process.env.SUPERSECRET) {
                         player.body.define(Class.testbed);
                     } }
                 } break;
