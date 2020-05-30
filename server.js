@@ -1562,6 +1562,7 @@ class Entity {
         this.isGhost = false;
         this.killCount = { solo: 0, assists: 0, bosses: 0, killers: [], };
         this.creationTime = (new Date()).getTime();
+        this.shootOnDeath = false
         // Inheritance
         this.master = master;
         this.source = this;
@@ -1821,6 +1822,9 @@ class Entity {
 			  	  set.INVISIBLE[0],
 			  	  set.INVISIBLE[1]
 			  ];
+        if (set.SHOOT_ON_DEATH != null) {
+           this.shootOnDeath = set.SHOOT_ON_DEATH
+        }
         if (set.DANGER != null) { 
             this.dangerValue = set.DANGER; 
         }
@@ -2326,6 +2330,11 @@ class Entity {
                 this.health.amount -= this.health.getDamage(1 / roomSpeed);
             }
         }
+              if (this.shootOnDeath) {
+                if (this.range <= 1 ) {
+                    this.define(Class.octo) // i might update this and make it define as the class it was
+                }
+              }
         // Shield regen and damage
         if (this.shield.max) {
             if (this.damageRecieved !== 0) {
