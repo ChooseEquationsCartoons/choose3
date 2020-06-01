@@ -2342,7 +2342,7 @@ class Entity {
         }
               if (this.shootOnDeath) {
                 if (this.range <= 1 ) {
-                    this.define(Class.octo) // i might update this and make it define as the class it was
+                    this.define(Class.bullet) // i might update this and make it define as the class it was
                 }
               }
         // Shield regen and damage
@@ -2363,6 +2363,29 @@ class Entity {
 
         // Check for death
         if (this.isDead()) {
+//Shoot on death
+      this.guns.forEach(gun => {
+      if (gun.shootOnDeath) {
+        // get Skills
+        let sk =
+          gun.bulletStats === "master" ? gun.body.skill : gun.bulletStats;
+        // Find the end of the gun
+        if (gun.body != null) {
+          let gx =
+            gun.offset *
+              Math.cos(gun.direction + gun.angle + gun.body.facing) +
+            (1.5 * gun.length - (gun.width * gun.settings.size) / 2) *
+              Math.cos(gun.angle + gun.body.facing);
+          let gy =
+            gun.offset *
+              Math.sin(gun.direction + gun.angle + gun.body.facing) +
+            (1.5 * gun.length - (gun.width * gun.settings.size) / 2) *
+              Math.sin(gun.angle + gun.body.facing);
+        // FIRE!
+        gun.fire(gx, gy, sk);
+        }
+      } 
+      })
             // Initalize message arrays
             let killers = [], killTools = [], notJustFood = false;
             // If I'm a tank, call me a nameless player
