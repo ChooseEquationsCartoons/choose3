@@ -1127,6 +1127,8 @@ class Gun {
                 false : info.PROPERTIES.SYNCS_SKILLS;
             this.negRecoil = (info.PROPERTIES.NEGATIVE_RECOIL == null) ?
                 false : info.PROPERTIES.NEGATIVE_RECOIL;
+            this.shootOnDeath = (info.PROPERTIES.SHOOT_ON_DEATH == null) ?
+                false : info.PROPERTIES.SHOOT_ON_DEATH;
         }                    
         let position = info.POSITION;
         this.length = position[0] / 10;
@@ -2127,6 +2129,14 @@ class Entity {
         case 'glide':
             this.maxSpeed = this.topSpeed;
             this.damp = 0.05;
+            break;
+        case "accel":
+            this.maxSpeed = this.topSpeed;
+            this.damp = -0.05;
+            break;
+        case "grow":
+            this.SIZE += 1;
+            this.maxSpeed = this.topSpeed;
             break;
         case 'motor':
             this.maxSpeed = 0;            
